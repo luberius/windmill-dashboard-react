@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react';
 
-import PageTitle from '../components/Typography/PageTitle'
-import SectionTitle from '../components/Typography/SectionTitle'
-import CTA from '../components/CTA'
-import InfoCard from '../components/Cards/InfoCard'
-import { Card, CardBody } from '@windmill/react-ui'
-import { CartIcon, ChatIcon, MoneyIcon, PeopleIcon } from '../icons'
-import RoundIcon from '../components/RoundIcon'
+import { Card, CardBody } from '@luberius/fork-windmill-react-ui';
+import PageTitle from '../components/Typography/PageTitle';
+import SectionTitle from '../components/Typography/SectionTitle';
+import CTA from '../components/CTA';
+import InfoCard from '../components/Cards/InfoCard';
+import { CartIcon, ChatIcon, MoneyIcon, PeopleIcon } from '../icons';
+import RoundIcon from '../components/RoundIcon';
 
 function Cards() {
   return (
@@ -91,7 +91,7 @@ function Cards() {
         </Card>
       </div>
     </>
-  )
+  );
 }
 
-export default Cards
+export default Cards;

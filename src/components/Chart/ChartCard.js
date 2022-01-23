@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 function Chart({ children, title }) {
   return (
@@ -6,7 +6,7 @@ function Chart({ children, title }) {
       <p className="mb-4 font-semibold text-gray-800 dark:text-gray-300">{title}</p>
       {children}
     </div>
-  )
+  );
 }
 
-export default Chart
+export default Chart;

@@ -32,7 +32,7 @@ Windmill Dashboard React is built on top of [Windmill React UI](https://windmill
 
 ### Routing
 
-Routes in Windmill Dashboard are separated into two categories, sidebar ([routes/sidebar.js](src/routes/sidebar.js)) and general ([routes/index.js](src/routes/index.js)).
+Routes in Windmill Dashboard are separated into two categories, sidebar ([routes/sidebar.js](src/routes/sidebar.js)) and general ([routes/index.jsx](src/routes/index.js)).
 
 #### Sidebar routes
 
@@ -70,12 +70,12 @@ Item that are used as dropdowns, like the Pages option, don't need a `path`, but
 
 These are **internal** (private) routes. They will be rendered inside the app, using the default `containers/Layout`.
 
-If you want to add a route to, let's say, a landing page, you should add it to the `App`'s router ([src/App.js](src/App.js), exactly like `Login`, `CreateAccount` and other pages are routed.
+If you want to add a route to, let's say, a landing page, you should add it to the `App`'s router ([src/App.jsx](src/App.jsx), exactly like `Login`, `CreateAccount` and other pages are routed.
 
 #### How to add a new page to router?
 
 1. Create your page inside `src/pages`, say `MyPage.js`;
-2. Add it to the global router (`src/routes/index.js`)
+2. Add it to the global router (`src/routes/index.jsx`)
 
 ```js
 const MyPage = lazy(() => import('../pages/MyPage'))
@@ -96,8 +96,8 @@ Then add it to the `routes` array:
 
 ```js
 {
-  path: '/app/my-page', // /app + the url you added in routes/index.js
-  icon: 'HomeIcon', // the component being exported from src/icons/index.js
+  path: '/app/my-page', // /app + the url you added in routes/index.jsx
+  icon: 'HomeIcon', // the component being exported from src/icons/index.jsx
   name: 'My Page', // name that appear in Sidebar
 },
 ```
@@ -116,7 +116,7 @@ Then add it to the `routes` array:
     },
 ```
 
-If you're asking where does this `/app` come from, it is from this line inside `src/App.js`, that renders the app:
+If you're asking where does this `/app` come from, it is from this line inside `src/App.jsx`, that renders the app:
 
 ```jsx
 <Route path="/app" component={Layout} />

@@ -1,10 +1,10 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import ImageLight from '../assets/img/create-account-office.jpeg'
-import ImageDark from '../assets/img/create-account-office-dark.jpeg'
-import { GithubIcon, TwitterIcon } from '../icons'
-import { Input, Label, Button } from '@windmill/react-ui'
+import { Input, Label, Button } from '@luberius/fork-windmill-react-ui';
+import ImageLight from '../assets/img/create-account-office.jpeg';
+import ImageDark from '../assets/img/create-account-office-dark.jpeg';
+import { GithubIcon, TwitterIcon } from '../icons';
 
 function Login() {
   return (
@@ -68,8 +68,7 @@ function Login() {
               <p className="mt-4">
                 <Link
                   className="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
-                  to="/login"
-                >
+                  to="/login">
                   Already have an account? Login
                 </Link>
               </p>
@@ -78,7 +77,7 @@ function Login() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;

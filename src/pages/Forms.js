@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
-import CTA from '../components/CTA'
-import PageTitle from '../components/Typography/PageTitle'
-import SectionTitle from '../components/Typography/SectionTitle'
-import { Input, HelperText, Label, Select, Textarea } from '@windmill/react-ui'
+import { Input, HelperText, Label, Select, Textarea } from '@luberius/fork-windmill-react-ui';
+import CTA from '../components/CTA';
+import PageTitle from '../components/Typography/PageTitle';
+import SectionTitle from '../components/Typography/SectionTitle';
 
-import { MailIcon } from '../icons'
+import { MailIcon } from '../icons';
 
 function Forms() {
   return (
@@ -90,8 +90,8 @@ function Forms() {
 
         <Label className="mt-4">
           <span>Valid input</span>
-          <Input className="mt-1" valid={true} placeholder="Jane Doe" />
-          <HelperText valid={true}>Your password is strong.</HelperText>
+          <Input className="mt-1" valid placeholder="Jane Doe" />
+          <HelperText valid>Your password is strong.</HelperText>
         </Label>
 
         <Label className="mt-4">
@@ -165,7 +165,7 @@ function Forms() {
         </Label>
       </div>
     </>
-  )
+  );
 }
 
-export default Forms
+export default Forms;

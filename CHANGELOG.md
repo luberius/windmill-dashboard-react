@@ -3,7 +3,7 @@
 
 ### Bug Fixes
 
-* **buttons:** update icon Buttons syntax as recommended in @windmill/react-ui ([15260fd](https://github.com/estevanmaito/windmill-dashboard-react/commit/15260fd23600bfcef488edd818df35a7e4652a58))
+* **buttons:** update icon Buttons syntax as recommended in @luberius/fork-windmill-react-ui ([15260fd](https://github.com/estevanmaito/windmill-dashboard-react/commit/15260fd23600bfcef488edd818df35a7e4652a58))
 * **sidebar:** hide sidebar until `lg` breakpoint for a better experience on tablets ([57293d9](https://github.com/estevanmaito/windmill-dashboard-react/commit/57293d92d76bbe48f8fab71ea6ef8606fbce72a3)), closes [#3](https://github.com/estevanmaito/windmill-dashboard-react/issues/3)
 
 
@@ -29,7 +29,7 @@ create a better experience on smaller screens, especially tablets.
 
 ### Bug Fixes
 
-* **windmill:** bump @windmill/react-ui from 0.3.0 to 0.3.1 ([2d3499c](https://github.com/estevanmaito/windmill-dashboard-react/commit/2d3499c4ca3a0b69cc4c9885303505f03646c111))
+* **windmill:** bump @luberius/fork-windmill-react-ui from 0.3.0 to 0.3.1 ([2d3499c](https://github.com/estevanmaito/windmill-dashboard-react/commit/2d3499c4ca3a0b69cc4c9885303505f03646c111))
 
 # [0.3.0](https://github.com/estevanmaito/windmill-dashboard-react/compare/0.2.2...0.3.0) (2020-07-21)
 
@@ -42,7 +42,7 @@ create a better experience on smaller screens, especially tablets.
 ### BREAKING CHANGES
 
 * **windmill:** Changed every occurrence of `windmill-react-ui` with the scoped
-`@windmill/react-ui`. You should see no difference updating and you should update, as the other
+`@luberius/fork-windmill-react-ui`. You should see no difference updating and you should update, as the other
 project is now deprecated and will no longer be developed. This was needed because the `windmill`
 org was in dispute and npm solved it today.
 
@@ -112,7 +112,7 @@ module.exports = windmill({
 
 * **avatar:** update avatar image syntax ([e16ea68](https://github.com/estevanmaito/windmill-dashboard-react/commit/e16ea68435ffd9bc7404dfb80120ff18c4c39052))
 * **layout:** increase header and sidebar z-index ([c948638](https://github.com/estevanmaito/windmill-dashboard-react/commit/c9486383e3129fb57af5aa0a9ca91c57946c44c1))
-* **routes:** redirect index to login ([06405ac](https://github.com/estevanmaito/windmill-dashboard-react/commit/06405ac345c4bdfa6e66bf5225bad868d5721d8b))
+* **routes:** Navigate index to login ([06405ac](https://github.com/estevanmaito/windmill-dashboard-react/commit/06405ac345c4bdfa6e66bf5225bad868d5721d8b))
 
 
 ### BREAKING CHANGES

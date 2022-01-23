@@ -1,14 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 
-import CTA from '../components/CTA'
-import InfoCard from '../components/Cards/InfoCard'
-import ChartCard from '../components/Chart/ChartCard'
-import { Doughnut, Line } from 'react-chartjs-2'
-import ChartLegend from '../components/Chart/ChartLegend'
-import PageTitle from '../components/Typography/PageTitle'
-import { ChatIcon, CartIcon, MoneyIcon, PeopleIcon } from '../icons'
-import RoundIcon from '../components/RoundIcon'
-import response from '../utils/demo/tableData'
+import { Doughnut, Line } from 'react-chartjs-2';
 import {
   TableBody,
   TableContainer,
@@ -19,34 +11,42 @@ import {
   TableFooter,
   Avatar,
   Badge,
-  Pagination,
-} from '@windmill/react-ui'
+  Pagination
+} from '@luberius/fork-windmill-react-ui';
+import CTA from '../components/CTA';
+import InfoCard from '../components/Cards/InfoCard';
+import ChartCard from '../components/Chart/ChartCard';
+import ChartLegend from '../components/Chart/ChartLegend';
+import PageTitle from '../components/Typography/PageTitle';
+import { ChatIcon, CartIcon, MoneyIcon, PeopleIcon } from '../icons';
+import RoundIcon from '../components/RoundIcon';
+import response from '../utils/demo/tableData';
 
 import {
   doughnutOptions,
   lineOptions,
   doughnutLegends,
-  lineLegends,
-} from '../utils/demo/chartsData'
+  lineLegends
+} from '../utils/demo/chartsData';
 
 function Dashboard() {
-  const [page, setPage] = useState(1)
-  const [data, setData] = useState([])
+  const [page, setPage] = useState(1);
+  const [data, setData] = useState([]);
 
   // pagination setup
-  const resultsPerPage = 10
-  const totalResults = response.length
+  const resultsPerPage = 10;
+  const totalResults = response.length;
 
   // pagination change control
   function onPageChange(p) {
-    setPage(p)
+    setPage(p);
   }
 
   // on page change, load new sliced data
   // here you would make another server request for new data
   useEffect(() => {
-    setData(response.slice((page - 1) * resultsPerPage, page * resultsPerPage))
-  }, [page])
+    setData(response.slice((page - 1) * resultsPerPage, page * resultsPerPage));
+  }, [page]);
 
   return (
     <>
@@ -151,7 +151,7 @@ function Dashboard() {
         </ChartCard>
       </div>
     </>
-  )
+  );
 }
 
-export default Dashboard
+export default Dashboard;

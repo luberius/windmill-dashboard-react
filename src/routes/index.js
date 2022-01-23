@@ -1,15 +1,17 @@
-import { lazy } from 'react'
+import { lazy } from 'react';
 
 // use lazy for better code splitting, a.k.a. load faster
-const Dashboard = lazy(() => import('../pages/Dashboard'))
-const Forms = lazy(() => import('../pages/Forms'))
-const Cards = lazy(() => import('../pages/Cards'))
-const Charts = lazy(() => import('../pages/Charts'))
-const Buttons = lazy(() => import('../pages/Buttons'))
-const Modals = lazy(() => import('../pages/Modals'))
-const Tables = lazy(() => import('../pages/Tables'))
-const Page404 = lazy(() => import('../pages/404'))
-const Blank = lazy(() => import('../pages/Blank'))
+const Dashboard = lazy(() => import('../pages/Dashboard'));
+const Forms = lazy(() => import('../pages/Forms'));
+const Cards = lazy(() => import('../pages/Cards'));
+const Charts = lazy(() => import('../pages/Charts'));
+const Buttons = lazy(() => import('../pages/Buttons'));
+const Modals = lazy(() => import('../pages/Modals'));
+const Tables = lazy(() => import('../pages/Tables'));
+const Page404 = lazy(() => import('../pages/404'));
+const Blank = lazy(() => import('../pages/Blank'));
+const Users = lazy(() => import('../pages/Users'));
+const InputData = lazy(() => import('../pages/InputData'));
 
 /**
  * ⚠ These are internal routes!
@@ -24,40 +26,48 @@ const Blank = lazy(() => import('../pages/Blank'))
 const routes = [
   {
     path: '/dashboard', // the url
-    component: Dashboard, // view rendered
+    component: Dashboard // view rendered
   },
   {
     path: '/forms',
-    component: Forms,
+    component: Forms
   },
   {
     path: '/cards',
-    component: Cards,
+    component: Cards
   },
   {
     path: '/charts',
-    component: Charts,
+    component: Charts
   },
   {
     path: '/buttons',
-    component: Buttons,
+    component: Buttons
   },
   {
     path: '/modals',
-    component: Modals,
+    component: Modals
   },
   {
     path: '/tables',
-    component: Tables,
+    component: Tables
   },
   {
     path: '/404',
-    component: Page404,
+    component: Page404
   },
   {
     path: '/blank',
-    component: Blank,
+    component: Blank
   },
-]
+  {
+    path: '/users',
+    component: Users
+  },
+  {
+    path: '/input-data',
+    component: InputData
+  }
+];
 
-export default routes
+export default routes;

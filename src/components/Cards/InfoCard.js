@@ -1,5 +1,5 @@
-import React from 'react'
-import { Card, CardBody } from '@windmill/react-ui'
+import React from 'react';
+import { Card, CardBody } from '@luberius/fork-windmill-react-ui';
 
 function InfoCard({ title, value, children: icon }) {
   return (
@@ -12,7 +12,7 @@ function InfoCard({ title, value, children: icon }) {
         </div>
       </CardBody>
     </Card>
-  )
+  );
 }
 
-export default InfoCard
+export default InfoCard;

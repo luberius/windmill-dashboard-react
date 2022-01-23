@@ -1,8 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 
-import PageTitle from '../components/Typography/PageTitle'
-import SectionTitle from '../components/Typography/SectionTitle'
-import CTA from '../components/CTA'
 import {
   Table,
   TableHeader,
@@ -14,13 +11,16 @@ import {
   Badge,
   Avatar,
   Button,
-  Pagination,
-} from '@windmill/react-ui'
-import { EditIcon, TrashIcon } from '../icons'
+  Pagination
+} from '@luberius/fork-windmill-react-ui';
+import PageTitle from '../components/Typography/PageTitle';
+import SectionTitle from '../components/Typography/SectionTitle';
+import CTA from '../components/CTA';
+import { EditIcon, TrashIcon } from '../icons';
 
-import response from '../utils/demo/tableData'
+import response from '../utils/demo/tableData';
 // make a copy of the data, for the second table
-const response2 = response.concat([])
+const response2 = response.concat([]);
 
 function Tables() {
   /**
@@ -32,38 +32,38 @@ function Tables() {
    */
 
   // setup pages control for every table
-  const [pageTable1, setPageTable1] = useState(1)
-  const [pageTable2, setPageTable2] = useState(1)
+  const [pageTable1, setPageTable1] = useState(1);
+  const [pageTable2, setPageTable2] = useState(1);
 
   // setup data for every table
-  const [dataTable1, setDataTable1] = useState([])
-  const [dataTable2, setDataTable2] = useState([])
+  const [dataTable1, setDataTable1] = useState([]);
+  const [dataTable2, setDataTable2] = useState([]);
 
   // pagination setup
-  const resultsPerPage = 10
-  const totalResults = response.length
+  const resultsPerPage = 10;
+  const totalResults = response.length;
 
   // pagination change control
   function onPageChangeTable1(p) {
-    setPageTable1(p)
+    setPageTable1(p);
   }
 
   // pagination change control
   function onPageChangeTable2(p) {
-    setPageTable2(p)
+    setPageTable2(p);
   }
 
   // on page change, load new sliced data
   // here you would make another server request for new data
   useEffect(() => {
-    setDataTable1(response.slice((pageTable1 - 1) * resultsPerPage, pageTable1 * resultsPerPage))
-  }, [pageTable1])
+    setDataTable1(response.slice((pageTable1 - 1) * resultsPerPage, pageTable1 * resultsPerPage));
+  }, [pageTable1]);
 
   // on page change, load new sliced data
   // here you would make another server request for new data
   useEffect(() => {
-    setDataTable2(response2.slice((pageTable2 - 1) * resultsPerPage, pageTable2 * resultsPerPage))
-  }, [pageTable2])
+    setDataTable2(response2.slice((pageTable2 - 1) * resultsPerPage, pageTable2 * resultsPerPage));
+  }, [pageTable2]);
 
   return (
     <>
@@ -174,7 +174,7 @@ function Tables() {
         </TableFooter>
       </TableContainer>
     </>
-  )
+  );
 }
 
-export default Tables
+export default Tables;

@@ -3,71 +3,76 @@
  * You can include any link here, local or external.
  *
  * If you're looking to actual Router routes, go to
- * `routes/index.js`
+ * `routes/index.jsx`
  */
 const routes = [
   {
     path: '/app/dashboard', // the url
-    icon: 'HomeIcon', // the component being exported from icons/index.js
-    name: 'Dashboard', // name that appear in Sidebar
+    icon: 'HomeIcon', // the component being exported from icons/index.jsx
+    name: 'Dashboard' // name that appear in Sidebar
   },
   {
-    path: '/app/forms',
+    path: '/app/input-data',
     icon: 'FormsIcon',
-    name: 'Forms',
+    name: 'Input Data'
   },
-  {
-    path: '/app/cards',
-    icon: 'CardsIcon',
-    name: 'Cards',
-  },
+  // {
+  //   path: '/app/cards',
+  //   icon: 'CardsIcon',
+  //   name: 'Cards'
+  // },
   {
     path: '/app/charts',
     icon: 'ChartsIcon',
-    name: 'Charts',
+    name: 'Charts'
   },
+  // {
+  //   path: '/app/buttons',
+  //   icon: 'ButtonsIcon',
+  //   name: 'Buttons'
+  // },
+  // {
+  //   path: '/app/modals',
+  //   icon: 'ModalsIcon',
+  //   name: 'Modals'
+  // },
+  // {
+  //   path: '/app/tables',
+  //   icon: 'TablesIcon',
+  //   name: 'Tables'
+  // },
   {
-    path: '/app/buttons',
-    icon: 'ButtonsIcon',
-    name: 'Buttons',
-  },
-  {
-    path: '/app/modals',
-    icon: 'ModalsIcon',
-    name: 'Modals',
-  },
-  {
-    path: '/app/tables',
-    icon: 'TablesIcon',
-    name: 'Tables',
-  },
-  {
+    path: '/app/users',
+    icon: 'PeopleIcon',
+    name: 'Users'
+  }
+  /* {
     icon: 'PagesIcon',
     name: 'Pages',
     routes: [
       // submenu
       {
         path: '/login',
-        name: 'Login',
+        name: 'Login'
       },
       {
         path: '/create-account',
-        name: 'Create account',
+        name: 'Create account'
       },
       {
         path: '/forgot-password',
-        name: 'Forgot password',
+        name: 'Forgot password'
       },
       {
         path: '/app/404',
-        name: '404',
+        name: '404'
       },
       {
         path: '/app/blank',
-        name: 'Blank',
-      },
-    ],
-  },
-]
+        name: 'Blank'
+      }
+    ]
+  } */
+];
 
-export default routes
+export default routes;
