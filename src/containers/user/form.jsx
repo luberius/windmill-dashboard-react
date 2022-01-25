@@ -22,6 +22,7 @@ function UserForm(props) {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [role, setRole] = useState('user');
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchUser = () => {
     http.get();
@@ -60,15 +61,21 @@ function UserForm(props) {
     if (validate()) return;
     const endpoint = edit ? 'update' : 'register';
     const caption = edit ? 'simpan' : 'buat';
+    const toastId = toast.loading('Menyimpan..');
 
+    setIsLoading(true);
     http
       .post(endpoint, { username, password, role })
       .then((r) => {
         console.log(r.data);
+        setIsLoading(false);
+        toast.remove(toastId);
         showSuccessNotification(`User berhasil di ${caption}`);
         history.push('/app/users');
       })
       .catch((e) => {
+        setIsLoading(false);
+        toast.remove(toastId);
         toast.error(e.response.data.message || e.message);
       });
   };
@@ -95,7 +102,7 @@ function UserForm(props) {
           <span>Password</span>
           <Input
             className="mt-2"
-            type="text"
+            type="password"
             placeholder="Password"
             value={password}
             onChange={({ target: e }) => setPassword(e.value)}
@@ -106,7 +113,7 @@ function UserForm(props) {
           <span>Confirm Password</span>
           <Input
             className="mt-2"
-            type="text"
+            type="password"
             placeholder="Confirm Passowrd"
             value={confirmPassword}
             onChange={({ target: e }) => setConfirmPassword(e.value)}
@@ -122,7 +129,9 @@ function UserForm(props) {
         </Label>
 
         <div className="flex justify-end mt-6">
-          <Button onClick={doSave}>{edit ? 'Save' : 'Create'}</Button>
+          <Button onClick={doSave} disabled={isLoading}>
+            {edit ? 'Save' : 'Create'}
+          </Button>
         </div>
       </CardBody>
     </Card>
