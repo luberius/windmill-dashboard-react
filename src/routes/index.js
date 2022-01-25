@@ -10,8 +10,9 @@ const Modals = lazy(() => import('../pages/Modals'));
 const Tables = lazy(() => import('../pages/Tables'));
 const Page404 = lazy(() => import('../pages/404'));
 const Blank = lazy(() => import('../pages/Blank'));
-const Users = lazy(() => import('../pages/Users'));
+const Users = lazy(() => import('../pages/user/Users'));
 const InputData = lazy(() => import('../pages/InputData'));
+const AddUser = lazy(() => import('../pages/user/Add'));
 
 /**
  * ⚠ These are internal routes!
@@ -63,6 +64,10 @@ const routes = [
   {
     path: '/users',
     component: Users
+  },
+  {
+    path: '/users/add',
+    component: AddUser
   },
   {
     path: '/input-data',
