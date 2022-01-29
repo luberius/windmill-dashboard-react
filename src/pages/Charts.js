@@ -19,7 +19,6 @@ import ChartCard from '../components/Chart/ChartCard';
 import PageTitle from '../components/Typography/PageTitle';
 import { doughnutOptions } from '../utils/demo/chartsData';
 import http from '../utils/axios/axios';
-import 'react-datepicker/dist/react-datepicker.css';
 import { formatDate } from '../utils/date';
 
 function Charts() {
