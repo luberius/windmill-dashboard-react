@@ -7,6 +7,7 @@ import {
   Input,
   Label,
   Pagination,
+  Select,
   Table,
   TableBody,
   TableCell,
@@ -17,19 +18,25 @@ import {
 } from '@luberius/fork-windmill-react-ui';
 import ChartCard from '../components/Chart/ChartCard';
 import PageTitle from '../components/Typography/PageTitle';
-import { doughnutOptions } from '../utils/demo/chartsData';
 import http from '../utils/axios/axios';
 import { formatDate } from '../utils/date';
+import { defaultData, defaultOptions } from '../models/stock.model';
+import filterItems from '../utils/array';
 
 function Charts() {
   const [stockData, setStockData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+  const [dataLength, setDataLength] = useState(0);
   const [stockDataTable, setStockDataTable] = useState([]);
   const [branches, setBranches] = useState([]);
-  const [stockOptions, setStockOption] = useState(doughnutOptions);
 
+  const [branch, setBranch] = useState('');
   const [startDate, setStartDate] = useState(formatDate(new Date()));
   const [endDate, setEndDate] = useState(formatDate(new Date()));
   const [pageTable, setPageTable] = useState(1);
+  const [searchKey, setSearchKey] = useState('');
+
+  const [chartData, setChartData] = useState(defaultData);
 
   const resultsPerPage = 10;
 
@@ -39,22 +46,17 @@ function Charts() {
         params: {
           start_date: startDate || new Date(),
           end_date: endDate || new Date(),
-          branch: ''
+          branch
         }
       })
       .then((r) => {
         setStockData(r.data.data.getDataStock);
-        setStockDataTable(
-          r.data.data.getDataStock.slice(
-            (pageTable - 1) * resultsPerPage,
-            pageTable * resultsPerPage
-          )
-        );
-
-        generateStockData();
+        setFilteredData(filterItems(searchKey, r.data.data.getDataStock, 'product_description'));
+        setDataLength(r.data.data.getDataStock.length);
       })
       .catch((e) => {
-        toast.error(e.message);
+        console.log(e);
+        toast.error(e.response.data.message);
       });
   };
 
@@ -65,7 +67,7 @@ function Charts() {
         setBranches(r.data);
       })
       .catch((e) => {
-        toast.error(e.message);
+        toast.error(e.response.data.message);
       });
   };
 
@@ -82,24 +84,15 @@ function Charts() {
       bgColors.push(colors[index][1]);
     }
 
-    setStockOption({
-      data: {
-        datasets: [
-          {
-            data: theData,
-            backgroundColor: bgColors,
-            label: 'Dataset 1'
-          }
-        ],
-        labels: theLables
-      },
-      options: {
-        responsive: true,
-        cutoutPercentage: 0
-      },
-      legend: {
-        display: false
-      }
+    setChartData({
+      datasets: [
+        {
+          data: theData,
+          backgroundColor: bgColors,
+          label: 'Dataset 1'
+        }
+      ],
+      labels: theLables
     });
   };
 
@@ -109,71 +102,106 @@ function Charts() {
 
   useEffect(() => {
     fetchStockData();
-  }, [startDate, endDate]);
+  }, [branch, startDate, endDate]);
+
+  useEffect(() => {
+    generateStockData();
+  }, [stockData]);
 
   useEffect(() => {
     setStockDataTable(
-      stockData.slice((pageTable - 1) * resultsPerPage, pageTable * resultsPerPage)
+      filteredData.slice((pageTable - 1) * resultsPerPage, pageTable * resultsPerPage)
     );
-  }, [pageTable]);
+  }, [pageTable, filteredData]);
+
+  useEffect(async () => {
+    await setPageTable(1);
+    setFilteredData(filterItems(searchKey, stockData, 'product_description'));
+  }, [searchKey]);
 
   return (
     <>
       <PageTitle>Stock Chart</PageTitle>
-      <div className="flex mb-4 md:w-1/2">
-        <Label>
-          <span>Start Date</span>
-          <Input
-            type="date"
-            value={startDate}
-            onChange={(event) => setStartDate(event.target.value)}
-          />
-        </Label>
-        <Label className="ml-4">
-          <span>End Date</span>
-          <Input type="date" value={endDate} onChange={(event) => setEndDate(event.target.value)} />
-        </Label>
-      </div>
       <div className="inline-grid gap-6 mb-8 md:grid-cols-2">
-        <ChartCard title="Doughnut">
-          <Doughnut {...stockOptions} />
-          <br />
-        </ChartCard>
-
-        <TableContainer className="mb-8">
-          <Table>
-            <TableHeader>
-              <tr>
-                <TableCell>Code</TableCell>
-                <TableCell>Product Desc</TableCell>
-                <TableCell>Stock</TableCell>
-              </tr>
-            </TableHeader>
-            <TableBody>
-              {stockDataTable.map((data, i) => (
-                <TableRow key={i}>
-                  <TableCell>
-                    <span className="text-sm">{data.code}</span>
-                  </TableCell>
-                  <TableCell>
-                    <span className="text-sm">{data.product_description}</span>
-                  </TableCell>
-                  <TableCell>
-                    <span className="text-sm text-right">{data.sum}</span>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-          <TableFooter>
-            <Pagination
-              totalResults={stockData.length}
-              resultsPerPage={resultsPerPage}
-              onChange={(p) => setPageTable(p)}
-              label="Table navigation"
+        <div>
+          <div className="flex flex-wrap mb-4">
+            <Label className="flex-1">
+              <span>Start Date</span>
+              <Input
+                type="date"
+                value={startDate}
+                onChange={(event) => setStartDate(event.target.value)}
+              />
+            </Label>
+            <Label className="ml-4 flex-1">
+              <span>End Date</span>
+              <Input
+                type="date"
+                value={endDate}
+                onChange={(event) => setEndDate(event.target.value)}
+              />
+            </Label>
+            <Label className="mt-4 w-full">
+              <span>Branch</span>
+              <Select onChange={(e) => setBranch(e.target.value)}>
+                <option value="">All</option>
+                {branches.map((b, i) => (
+                  <option key={i} value={b.branch}>
+                    {b.branch}
+                  </option>
+                ))}
+              </Select>
+            </Label>
+          </div>
+          <ChartCard title="Doughnut">
+            <Doughnut data={chartData} options={defaultOptions} legend={{ display: false }} />
+            <br />
+          </ChartCard>
+        </div>
+        <div>
+          <Label className="mb-6">
+            <span>Search Product</span>
+            <Input
+              type="text"
+              value={searchKey}
+              onChange={(event) => setSearchKey(event.target.value)}
             />
-          </TableFooter>
-        </TableContainer>
+          </Label>
+          <TableContainer className="mb-8">
+            <Table>
+              <TableHeader>
+                <tr>
+                  <TableCell>Code</TableCell>
+                  <TableCell>Product Desc</TableCell>
+                  <TableCell>Stock</TableCell>
+                </tr>
+              </TableHeader>
+              <TableBody>
+                {stockDataTable.map((data, i) => (
+                  <TableRow key={i}>
+                    <TableCell>
+                      <span className="text-sm">{data.code}</span>
+                    </TableCell>
+                    <TableCell>
+                      <span className="text-sm">{data.product_description}</span>
+                    </TableCell>
+                    <TableCell>
+                      <span className="text-sm text-right">{data.sum}</span>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+            <TableFooter>
+              <Pagination
+                totalResults={dataLength}
+                resultsPerPage={resultsPerPage}
+                onChange={(p) => setPageTable(p)}
+                label="Table navigation"
+              />
+            </TableFooter>
+          </TableContainer>
+        </div>
       </div>
     </>
   );

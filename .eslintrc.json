@@ -28,6 +28,7 @@
         "react/no-array-index-key": "off",
         "react/jsx-no-bind": "warn",
         "no-unused-vars": "warn",
-        "no-use-before-define": "warn"
+        "no-use-before-define": "warn",
+        "prettier/prettier": "warn"
     }
 }

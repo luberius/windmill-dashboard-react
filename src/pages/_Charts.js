@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 
 import { Doughnut, Line, Bar } from 'react-chartjs-2';
 import { toast } from 'react-hot-toast';
-import DatePicker from 'react-datepicker';
 import colors from 'nice-color-palettes';
 import { HelperText, Input, Label } from '@luberius/fork-windmill-react-ui';
 import ChartCard from '../components/Chart/ChartCard';
@@ -17,7 +16,6 @@ import {
   barLegends
 } from '../utils/demo/chartsData';
 import http from '../utils/axios/axios';
-import 'react-datepicker/dist/react-datepicker.css';
 import { formatDate } from '../utils/date';
 
 function Charts() {
