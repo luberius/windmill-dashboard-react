@@ -61,6 +61,12 @@ function Login() {
       });
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      doLogin();
+    }
+  };
+
   return (
     <div className="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
       <div className="flex-1 max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
@@ -90,6 +96,7 @@ function Login() {
                   placeholder="Username"
                   value={username}
                   onChange={({ target: e }) => setUsername(e.value)}
+                  onKeyDown={handleKeyDown}
                 />
                 {error.username && <HelperText valid={false}>{error.username}</HelperText>}
               </Label>
@@ -101,6 +108,7 @@ function Login() {
                   type="password"
                   placeholder="***************"
                   onChange={({ target: e }) => setPassword(e.value)}
+                  onKeyDown={handleKeyDown}
                   value={password}
                 />
                 {error.password && <HelperText valid={false}>{error.password}</HelperText>}

@@ -1,38 +1,32 @@
 import React, { useEffect, useState } from 'react';
 
-import { Doughnut } from 'react-chartjs-2';
+import { Doughnut, Line, Bar } from 'react-chartjs-2';
 import { toast } from 'react-hot-toast';
+import DatePicker from 'react-datepicker';
 import colors from 'nice-color-palettes';
-import {
-  Input,
-  Label,
-  Pagination,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableFooter,
-  TableHeader,
-  TableRow
-} from '@luberius/fork-windmill-react-ui';
+import { HelperText, Input, Label } from '@luberius/fork-windmill-react-ui';
 import ChartCard from '../components/Chart/ChartCard';
+import ChartLegend from '../components/Chart/ChartLegend';
 import PageTitle from '../components/Typography/PageTitle';
-import { doughnutOptions } from '../utils/demo/chartsData';
+import {
+  doughnutOptions,
+  lineOptions,
+  barOptions,
+  doughnutLegends,
+  lineLegends,
+  barLegends
+} from '../utils/demo/chartsData';
 import http from '../utils/axios/axios';
 import 'react-datepicker/dist/react-datepicker.css';
 import { formatDate } from '../utils/date';
 
 function Charts() {
   const [stockData, setStockData] = useState([]);
-  const [stockDataTable, setStockDataTable] = useState([]);
   const [branches, setBranches] = useState([]);
   const [stockOptions, setStockOption] = useState(doughnutOptions);
 
-  const [startDate, setStartDate] = useState(formatDate(new Date()));
-  const [endDate, setEndDate] = useState(formatDate(new Date()));
-  const [pageTable, setPageTable] = useState(1);
-
-  const resultsPerPage = 10;
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
 
   const fetchStockData = () => {
     http
@@ -45,12 +39,6 @@ function Charts() {
       })
       .then((r) => {
         setStockData(r.data.data.getDataStock);
-        setStockDataTable(
-          r.data.data.getDataStock.slice(
-            (pageTable - 1) * resultsPerPage,
-            pageTable * resultsPerPage
-          )
-        );
 
         generateStockData();
       })
@@ -112,12 +100,6 @@ function Charts() {
     fetchStockData();
   }, [startDate, endDate]);
 
-  useEffect(() => {
-    setStockDataTable(
-      stockData.slice((pageTable - 1) * resultsPerPage, pageTable * resultsPerPage)
-    );
-  }, [pageTable]);
-
   return (
     <>
       <PageTitle>Stock Chart</PageTitle>
@@ -135,46 +117,21 @@ function Charts() {
           <Input type="date" value={endDate} onChange={(event) => setEndDate(event.target.value)} />
         </Label>
       </div>
-      <div className="inline-grid gap-6 mb-8 md:grid-cols-2">
+      <div className="grid gap-6 mb-8 md:grid-cols-2">
         <ChartCard title="Doughnut">
           <Doughnut {...stockOptions} />
-          <br />
+          <ChartLegend legends={doughnutLegends} />
         </ChartCard>
 
-        <TableContainer className="mb-8">
-          <Table>
-            <TableHeader>
-              <tr>
-                <TableCell>Code</TableCell>
-                <TableCell>Product Desc</TableCell>
-                <TableCell>Stock</TableCell>
-              </tr>
-            </TableHeader>
-            <TableBody>
-              {stockDataTable.map((data, i) => (
-                <TableRow key={i}>
-                  <TableCell>
-                    <span className="text-sm">{data.code}</span>
-                  </TableCell>
-                  <TableCell>
-                    <span className="text-sm">{data.product_description}</span>
-                  </TableCell>
-                  <TableCell>
-                    <span className="text-sm text-right">{data.sum}</span>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-          <TableFooter>
-            <Pagination
-              totalResults={stockData.length}
-              resultsPerPage={resultsPerPage}
-              onChange={(p) => setPageTable(p)}
-              label="Table navigation"
-            />
-          </TableFooter>
-        </TableContainer>
+        <ChartCard title="Lines">
+          <Line {...lineOptions} />
+          <ChartLegend legends={lineLegends} />
+        </ChartCard>
+
+        <ChartCard title="Bars">
+          <Bar {...barOptions} />
+          <ChartLegend legends={barLegends} />
+        </ChartCard>
       </div>
     </>
   );
