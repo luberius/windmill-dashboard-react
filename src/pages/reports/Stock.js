@@ -16,14 +16,14 @@ import {
   TableHeader,
   TableRow
 } from '@luberius/fork-windmill-react-ui';
-import ChartCard from '../components/Chart/ChartCard';
-import PageTitle from '../components/Typography/PageTitle';
-import http from '../utils/axios/axios';
-import { formatDate } from '../utils/date';
-import { defaultData, defaultOptions } from '../models/stock.model';
-import filterItems from '../utils/array';
+import ChartCard from '../../components/Chart/ChartCard';
+import PageTitle from '../../components/Typography/PageTitle';
+import http from '../../utils/axios/axios';
+import { formatDate } from '../../utils/date';
+import { defaultData, defaultOptions } from '../../models/stock.model';
+import filterItems from '../../utils/array';
 
-function Charts() {
+function Stock() {
   const [stockData, setStockData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [dataLength, setDataLength] = useState(0);
@@ -207,4 +207,4 @@ function Charts() {
   );
 }
 
-export default Charts;
+export default Stock;

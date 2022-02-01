@@ -26,6 +26,7 @@ import { ReactComponent as DropdownIcon } from './dropdown.svg';
 import { ReactComponent as OutlinePersonIcon } from './outlinePerson.svg';
 import { ReactComponent as OutlineCogIcon } from './outlineCog.svg';
 import { ReactComponent as OutlineLogoutIcon } from './outlineLogout.svg';
+import { ReactComponent as ExclamationIcon } from './exclamation.svg';
 
 export {
   ButtonsIcon,
@@ -55,5 +56,6 @@ export {
   DropdownIcon,
   OutlinePersonIcon,
   OutlineCogIcon,
-  OutlineLogoutIcon
+  OutlineLogoutIcon,
+  ExclamationIcon
 };

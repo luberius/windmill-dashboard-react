@@ -37,8 +37,7 @@
     "react-hot-toast": "^2.2.0",
     "react-router-dom": "5.2.1",
     "react-scripts": "5.0.0",
-    "react-transition-group": "4.4.2",
-    "tailwind-react-datepicker": "^1.1.2"
+    "react-transition-group": "4.4.2"
   },
   "devDependencies": {
     "@release-it/conventional-changelog": "4.1.0",

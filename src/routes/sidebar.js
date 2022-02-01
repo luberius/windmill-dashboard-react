@@ -22,9 +22,14 @@ const routes = [
   //   name: 'Cards'
   // },
   {
-    path: '/app/charts',
+    path: '/app/reports/stock',
     icon: 'ChartsIcon',
-    name: 'Charts'
+    name: 'Report Stock'
+  },
+  {
+    path: '/app/reports/expiry',
+    icon: 'ExclamationIcon',
+    name: 'Report Expiry'
   },
   // {
   //   path: '/app/buttons',

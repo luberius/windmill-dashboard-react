@@ -4,7 +4,7 @@ import { lazy } from 'react';
 const Dashboard = lazy(() => import('../pages/Dashboard'));
 const Forms = lazy(() => import('../pages/Forms'));
 const Cards = lazy(() => import('../pages/Cards'));
-const Charts = lazy(() => import('../pages/Charts'));
+const Stock = lazy(() => import('../pages/reports/Stock'));
 const Buttons = lazy(() => import('../pages/Buttons'));
 const Modals = lazy(() => import('../pages/Modals'));
 const Tables = lazy(() => import('../pages/Tables'));
@@ -13,6 +13,7 @@ const Blank = lazy(() => import('../pages/Blank'));
 const Users = lazy(() => import('../pages/user/Users'));
 const InputData = lazy(() => import('../pages/InputData'));
 const AddUser = lazy(() => import('../pages/user/Add'));
+const Expiry = lazy(() => import('../pages/reports/Expiry'));
 
 /**
  * ⚠ These are internal routes!
@@ -38,8 +39,12 @@ const routes = [
     component: Cards
   },
   {
-    path: '/charts',
-    component: Charts
+    path: '/reports/expiry',
+    component: Expiry
+  },
+  {
+    path: '/reports/stock',
+    component: Stock
   },
   {
     path: '/buttons',
