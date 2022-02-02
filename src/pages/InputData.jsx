@@ -4,7 +4,7 @@ import {
   Button,
   HelperText,
   Input,
-  Label,
+  Label, Modal, ModalBody, ModalFooter, ModalHeader,
   Pagination,
   Table,
   TableBody,
@@ -20,6 +20,7 @@ import http from '../utils/axios/axios';
 import { formatDate, formatDateDMY } from '../utils/date';
 import filterItems from '../utils/array';
 import SectionTitle from '../components/Typography/SectionTitle';
+import { EditIcon, TrashIcon } from '../icons';
 
 function InputData() {
   const [file, setFile] = useState();
@@ -27,9 +28,13 @@ function InputData() {
   const [dataLength, setDataLength] = useState(0);
   const [historyDataTable, setHistoryDataTable] = useState([]);
   const [pageTable, setPageTable] = useState(1);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [startDate, setStartDate] = useState(formatDate(new Date()));
   const [endDate, setEndDate] = useState(formatDate(new Date()));
+
+  const [selectedDate, setSelectedDate] = useState('');
 
   const resultsPerPage = 10;
 
@@ -50,6 +55,17 @@ function InputData() {
         toast.error(e.response.data.message);
       });
   };
+
+  const closeModal = () => {
+    setSelectedDate('');
+    setIsModalOpen(false);
+  };
+
+  const openModal = (date) => {
+    setSelectedDate(date);
+    setIsModalOpen(true);
+  };
+
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -75,6 +91,31 @@ function InputData() {
         fetchHistory();
       })
       .catch((err) => err.message);
+  };
+
+  const handelDelete = async () => {
+    setIsLoading(true);
+    const axiosCall = http.delete(`deleteImport`, {
+      data: {
+        date: selectedDate
+      }
+    });
+    await toast
+      .promise(axiosCall, {
+        loading: 'Menghapus..',
+        success: `Data pada tanggal ${selectedDate} berhasil dihapus`,
+        error: 'Gagal menghapus data'
+      })
+      .then(() => {
+        setIsLoading(false);
+        closeModal();
+        fetchHistory();
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        return err.message;
+      });
+    closeModal();
   };
 
   useEffect(() => {
@@ -111,6 +152,7 @@ function InputData() {
               <TableCell>File Name</TableCell>
               <TableCell>Created By</TableCell>
               <TableCell>Created At</TableCell>
+              <TableCell>Action</TableCell>
             </tr>
           </TableHeader>
           <TableBody>
@@ -125,6 +167,17 @@ function InputData() {
                 <TableCell>
                   <span className="text-sm">{formatDateDMY(new Date(data.created_at), '/')}</span>
                 </TableCell>
+                <TableCell className="w-32 lg:w-60">
+                  <div className="flex items-center space-x-4">
+                    <Button
+                      layout="link"
+                      size="icon"
+                      aria-label="Delete"
+                      onClick={() => openModal(formatDate(data.created_at))}>
+                      <TrashIcon className="w-5 h-5" aria-hidden="true" />
+                    </Button>
+                  </div>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -138,6 +191,43 @@ function InputData() {
           />
         </TableFooter>
       </TableContainer>
+
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <ModalHeader>Hapus Data</ModalHeader>
+        <ModalBody>
+          Hapus data pada tanggal <b>{selectedDate}</b>?
+        </ModalBody>
+        <ModalFooter className="pb-6">
+          <div className="hidden sm:block">
+            <Button layout="outline" onClick={closeModal}>
+              Cancel
+            </Button>
+          </div>
+          <div className="hidden sm:block">
+            <Button
+              className="bg-yellow-400 hover:bg-yellow-500"
+              onClick={handelDelete}
+              disabled={isLoading}>
+              Hapus
+            </Button>
+          </div>
+          <div className="block w-full sm:hidden">
+            <Button block size="large" layout="outline" onClick={closeModal}>
+              Cancel
+            </Button>
+          </div>
+          <div className="block w-full sm:hidden">
+            <Button
+              block
+              size="large"
+              className="bg-yellow-400 hover:bg-yellow-500"
+              onClick={handelDelete}
+              disabled={isLoading}>
+              Hapus
+            </Button>
+          </div>
+        </ModalFooter>
+      </Modal>
     </>
   );
 }
