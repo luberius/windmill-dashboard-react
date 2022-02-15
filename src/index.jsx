@@ -24,7 +24,7 @@ ReactDOM.render(
       </Windmill>
     </Suspense>
     <Toaster
-      position="top-right"
+      position="top-center"
       gutter={8}
       containerClassName=""
       containerStyle={{}}

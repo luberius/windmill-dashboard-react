@@ -4,7 +4,11 @@ import {
   Button,
   HelperText,
   Input,
-  Label, Modal, ModalBody, ModalFooter, ModalHeader,
+  Label,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
   Pagination,
   Table,
   TableBody,
@@ -66,7 +70,6 @@ function InputData() {
     setIsModalOpen(true);
   };
 
-
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
   };
@@ -88,6 +91,20 @@ function InputData() {
       })
       .then(() => {
         setFile(undefined);
+        fetchHistory();
+      })
+      .catch((err) => err.message);
+  };
+
+  const doSync = async () => {
+    const axiosCall = http.get('/sync');
+    toast
+      .promise(axiosCall, {
+        loading: 'Synchronizing..',
+        success: 'Berhasil sync data',
+        error: 'Gagal sync data'
+      })
+      .then(() => {
         fetchHistory();
       })
       .catch((err) => err.message);
@@ -140,6 +157,9 @@ function InputData() {
           </HelperText>
         </Label>
         <div className="flex justify-end">
+          <Button layout="outline" className="mr-4" onClick={doSync}>
+            Sync Data
+          </Button>
           <Button onClick={doUpload}>Upload</Button>
         </div>
       </div>
